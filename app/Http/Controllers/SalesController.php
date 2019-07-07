@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
-use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Sales;
 
-class ProductController extends Controller
+class SalesController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -22,9 +19,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $test = Auth::user()->branch_id;
-        $products = Product::paginate(10);
-        return view('product.index')->with('products', $products);
+        $sales = Sales::paginate(10);
+        return view('sales.index')->with('sales', $sales);
     }
 
     /**
@@ -34,7 +30,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.product_form');
+        return view('sales.sales_form');
     }
 
     /**
@@ -45,23 +41,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-                'name' => 'required',
-                'unit_price' => 'required|integer',
-                'quantity' => 'required|integer',
-                'critical_lvl' => 'required|integer|lt:quantity'
-            ], 
-            ['critical_lvl.lt' => 'The critical lvl must be less than quantity']
-        );
+        $sale = new Sales();
+        $sale->sales_date = Carbon::now();
+        $sale->discount = $request->input('discount');
+        $sale->branch_id = 1;
 
-        $product = new Product();
-        $data = $request->only($product->getFillable());
-        $product->fill($data);
-        $user_info = User::find(Auth::user()->id)->first();
-        $product->branch_id = $user_info->branch_id;
-
-        $product->save();
-        return redirect('/products');
+        $test = Auth::user()->name;
     }
 
     /**
@@ -72,7 +57,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -106,8 +91,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
-
-
 }

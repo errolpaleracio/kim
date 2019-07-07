@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\DB;
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -19,13 +19,6 @@ class CreateBranchesTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
-
-        DB::table('branches')->insert(
-            array(
-                array('name' => 'Batac Branch'),
-                array('name' => 'Laoag Branch')
-            )
-        );
     }
 
     /**

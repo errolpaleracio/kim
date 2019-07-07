@@ -15,12 +15,12 @@
         <tbody>
             @foreach ($products as $product)
                 <tr>
-                    <td>{{$product.id}}</td>
-                    <td>{{$product.name}}</td>
-                    <td>{{$product.unit_price}}</td>
-                    <td>{{$product.quantity}}</td>
-                    <td>{{$product.critical_lvl}}</td>
-                    <td>{{$product.branch_id}}</td>
+                    <td>{{$product->id}}</td>
+                    <td>{{$product->name}}</td>
+                    <td>{{$product->unit_price}}</td>
+                    <td>{{$product->quantity}}</td>
+                    <td>{{$product->critical_lvl}}</td>
+                    <td>{{$product->branch_id}}</td>
                 </tr>
             @endforeach
         </tbody>
