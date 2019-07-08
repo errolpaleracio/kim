@@ -18,3 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/login', 'AuthController@login');
+
+//Route::get('/products', 'ProductController@get_all')->name('product_list');
+Route::middleware('auth:api')->get('/products', 'ProductController@get_all')->name('product_list');
+Route::middleware('auth:api')->get('/products/{id}', 'ProductController@get')->name('get_product');

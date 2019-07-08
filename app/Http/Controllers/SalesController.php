@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Product;
 use App\Sales;
+use Illuminate\Support\Facades\Auth;
 
 class SalesController extends Controller
 {
@@ -30,7 +32,8 @@ class SalesController extends Controller
      */
     public function create()
     {
-        return view('sales.sales_form');
+        $products = Product::where('branch_id', Auth::user()->branch_id)->get();
+        return view('sales.sales_form')->with('products', $products);
     }
 
     /**

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<div class="container">
     <a href="products/create" class="btn btn-primary mb-4">Add new Product</a>
     <table class="table table-bordered table-striped">
         <thead>
@@ -29,5 +30,6 @@
         <ul class="pagination justify-content-end">
             {{$products->links('vendor.pagination.bootstrap-4')}}
         </ul>
-    </nav>
+    </nav>    
+</div>
 @endsection

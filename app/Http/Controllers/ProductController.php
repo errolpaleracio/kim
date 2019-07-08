@@ -6,6 +6,7 @@ use App\Product;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\ProductResource;
 
 class ProductController extends Controller
 {
@@ -109,5 +110,15 @@ class ProductController extends Controller
         //
     }
 
+    public function get($id)
+    {
+        $product = Product::where('id', $id)->get();
+        return new ProductResource($product);
+    }
 
+    public function get_all()
+    {
+        $products = Product::all();
+        return ProductResource::collection($products);
+    }
 }
