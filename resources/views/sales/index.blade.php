@@ -17,7 +17,7 @@
                     <td>{{$sale->id}}</td>
                     <td>{{$sale->date}}</td>
                     <td>{{$sale->discount}}</td>
-                    <td>{{$sale->branch_id}}</td>
+                    <td>{{$sale->branch->name}}</td>
                 </tr>
             @endforeach
         </tbody>

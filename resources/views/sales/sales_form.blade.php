@@ -50,7 +50,7 @@
             <form id="add_sales">
                     <form method="POST" action="{{ route('products.store') }}" id="sales_form" class="pl1">
                             @csrf
-                            
+                        <input type="hidden" name="branch_id" value="{{Auth::user()->branch_id}}" id="branch_id">
                             <div class="form-group row">
                                 <label for="name" class="col-md-12 col-form-label">Discount</label>
                                 <div class="col-md-9">
@@ -153,18 +153,31 @@
             var $discount = $('#discount');
 
             $('#payment').on('click', function(){
-                alert('test');
+                console.log(products)
                 $.ajax({
                     url: "{{route('add-sale')}}",
                     type: 'POST',
                     data: {
-                        'discount' : $discount.val()
+                        'discount' : $discount.val(),
+                        'branch_id' : $('#branch_id').val()
                     },
                     success: function (result,status,xhr) {
-                        console.log(result);
-                    },
-                    error: function(xhr, ajaxOptions, thrownError){
-                        console.log(xhr + " : " + ajaxOptions + " : " + thrownError)
+                        var sales_id = result.data.id;
+                        for(i = 0; i < products.length; i++){
+                            $.ajax({
+                                url: "{{route('create_sale_item')}}",
+                                type: 'POST',
+                                data: {
+                                    'unit_price' : products[i].unit_price,
+                                    'quantity' : products[i].quantity,
+                                    'product_id' : products[i].id,
+                                    'sales_id' : sales_id
+                                },
+                                success: function(result,status,xhr){
+                                    window.location.href = "{{route('sales.index')}}"
+                                }
+                            });                            
+                        }
                     }
                 });
             });

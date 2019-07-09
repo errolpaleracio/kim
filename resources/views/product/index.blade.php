@@ -10,7 +10,6 @@
                 <th>Unit Price</th>
                 <th>Quantity</th>
                 <th>Critical Lvl</th>
-                <th>Branch</th>
             </tr>
         </thead>
         <tbody>
@@ -21,7 +20,6 @@
                     <td>{{$product->unit_price}}</td>
                     <td>{{$product->quantity}}</td>
                     <td>{{$product->critical_lvl}}</td>
-                    <td>{{$product->branch_id}}</td>
                 </tr>
             @endforeach
         </tbody>

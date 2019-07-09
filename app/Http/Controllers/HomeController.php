@@ -24,7 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        session(['branch_id' => Auth::user()->branch_id]);
         return view('home');
     }
 }
