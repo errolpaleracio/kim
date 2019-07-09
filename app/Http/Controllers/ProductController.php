@@ -107,18 +107,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
-
-    public function get($id)
-    {
-        $product = Product::where('id', $id)->get();
-        return new ProductResource($product);
-    }
-
-    public function get_all()
-    {
-        $products = Product::all();
-        return ProductResource::collection($products);
+        
     }
 }

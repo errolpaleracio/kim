@@ -20,5 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/login', 'AuthController@login');
 
 //Route::get('/products', 'ProductController@get_all')->name('product_list');
-Route::middleware('auth:api')->get('/products', 'ProductController@get_all')->name('product_list');
-Route::middleware('auth:api')->get('/products/{id}', 'ProductController@get')->name('get_product');
+Route::get('/products', 'LookupController@get_all')->name('product_list');
+Route::get('/product', 'LookupController@get')->name('get_product');
+Route::get('/branch-id', 'LookupController@branch_id')->name('branch-id');
+Route::post('/add-sale', 'LookupController@create_sale')->name('add-sale');
