@@ -47,9 +47,7 @@ class SalesController extends Controller
         $sale = new Sales();
         $sale->sales_date = Carbon::now();
         $sale->discount = $request->input('discount');
-        $sale->branch_id = 1;
-
-        $test = Auth::user()->name;
+        $sale->branch_id = Auth::user()->branch_id;
     }
 
     /**
