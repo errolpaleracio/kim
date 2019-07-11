@@ -23,8 +23,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $test = Auth::user()->branch_id;
-        $products = Product::paginate(10);
+        $products = Product::where('branch_id', Auth::user()->branch_id)->paginate(10);
         return view('product.index')->with('products', $products);
     }
 
@@ -58,8 +57,7 @@ class ProductController extends Controller
         $product = new Product();
         $data = $request->only($product->getFillable());
         $product->fill($data);
-        $user_info = User::find(Auth::user()->id)->first();
-        $product->branch_id = $user_info->branch_id;
+        $product->branch_id = Auth::user()->branch_id;
 
         $product->save();
         return redirect('/products');
