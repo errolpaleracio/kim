@@ -24,7 +24,7 @@ class SalesController extends Controller
         $branch_id = Auth::user()->branch_id;
         $sales = null;
         if(isset($branch_id))
-            $sales = Sales::where('branch_id')->paginate(10);
+            $sales = Sales::where('branch_id', $branch_id)->paginate(10);
         else
             $sales = Sales::paginate(10);
             
