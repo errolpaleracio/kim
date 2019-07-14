@@ -44,7 +44,7 @@
                 </tr>
                 <tr>
                     <td>Subtotal</td>
-                    <td>0</td>
+                    <td><span id="subtotal">0</span></td>
                 </tr>
             </table>
             <form id="add_sales">
@@ -89,6 +89,7 @@
     <script>
         var products = [];
         window.onload = function(){
+
             var $product_list = $('#product_list tbody');
             var $selected_product = $('select[name="product_id"]');
             var $quantity = $('#quantity');
@@ -115,14 +116,51 @@
                 reset_form();
 
                 $('#product_count').text(products.length);
+                $('#subtotal').text(get_subtotal());
             })
+
+            function get_subtotal(){
+                var subtotal = 0;
+                for(i = 0; i < products.length; i++){
+                    subtotal += parseFloat(products[i].unit_price * products[i].quantity);
+                }
+                return subtotal;
+            }
+
+            var input = '';
+            $('#discount').on('keydown', function(e){
+                var subtotal = get_subtotal();
+                
+                var ch = String.fromCharCode(e.which);
+                if(ch == 46)
+                    return true;
+                if (ch > 31 && (ch < 48 || ch > 57))
+                    return false;
+                if(parseFloat(input + ch) >= subtotal)
+                    return false;
+                if(subtotal == 0)
+                    return false;
+                if(e.which == 8 && input.length > 0)
+                    input = input.substring(0, input.length-1);
+                if(e.which >= 48 && e.which <= 57)
+                    input += ch;
+                
+                var discount = 0;
+                
+                console.log(input);
+                if(input.length > 0 && parseFloat(input) < subtotal)
+                    $('#discount').text(subtotal - parseFloat(input))
+                if(input.length == 0)
+                $('#discount').text(subtotal)
+                
+            });
 
             function add_row(product){
                 var row = '<td>' + product.id + '</td>';
                 row += '<td>' + product.name + '</td>';
                 row += '<td>' + product.quantity + '</td>';
                 row += '<td>' + product.unit_price + '</td>';
-                row += '<td>' + parseFloat(product.unit_price) * parseInt(product.quantity) + '</td>';
+                row += '<td>' + (parseFloat(product.unit_price) * parseInt(product.quantity)).toFixed(2) + '</td>';
                 $product_list.append('<tr>' + row + '</tr>');
             }
 
@@ -181,7 +219,7 @@
                     }
                 });
             });
-
+            
             function isNumberKey(evt)
             {
                 var charCode = (evt.which) ? evt.which : event.keyCode
@@ -193,7 +231,8 @@
                 return true;  
             }
 
-            document.getElementById('discount').onkeypress = isNumberKey;
+            document.getElementById('quantity').onkeypress = isNumberKey;
+            
         }
 
 

@@ -43,5 +43,15 @@ class LookupController extends Controller
         $sale_item->product_id = $request->input('product_id');
         $sale_item->sales_id = $request->input('sales_id');
         $sale_item->save();
+
+        $product = Product::find($sale_item->product_id);
+        $product->quantity -= $sale_item->quantity;
+        $product->save();
+    }
+
+    public function get_sale_items(Request $request){
+        $id = $request->id;
+        $sales_items = Sale_Item::where('sales_id', $id)->with('product')->get();
+        return response()->json($sales_items);
     }
 }

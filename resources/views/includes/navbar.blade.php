@@ -19,7 +19,7 @@
                     <a class="nav-link" href="/products">Products</a>
                 </li>
                 <li class="nav-item {{request()->is('sales')? 'active' : ''}}">
-                    <a class="nav-link" href="/sales">Sales</a>
+                <a class="nav-link" href="/sales">Sales</a>
                 </li>
             </ul>
             <!-- Right Side Of Navbar -->
