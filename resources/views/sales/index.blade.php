@@ -7,8 +7,9 @@
             <tr>
                 <th>ID</th>
                 <th>Date</th>
-                <th>Total Amount</th>
+                <th>Subtotal</th>
                 <th>Discount</th>
+                <th>Total Amount</th>
                 <th>Branch</th>
                 <th>Actions</th>
             </tr>
@@ -17,9 +18,10 @@
             @foreach ($sales as $sale)
                 <tr>
                     <td>{{$sale->id}}</td>
-                    <td>{{date_format(date_create($sale->sales_date), 'F d, Y')}}</td>
+                    <td>{{date_format(date_create($sale->sales_date), 'F d, Y')}}</td>                    
                     <td>{{$sale->get_total()}}</td>
                     <td>{{$sale->discount}}</td>
+                    <td>{{$sale->get_total() - $sale->discount}}</td>
                     <td>{{$sale->branch->name}}</td>
                     <td><button class="btn btn-primary" data-toggle="modal" data-target="#ViewSalesDetailModal" data-id="{{$sale->id}}">View Details</button></td>
                 </tr>
