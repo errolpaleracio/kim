@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->decimal('unit_price', 13, 2);
             $table->integer('quantity');
             $table->integer('critical_lvl');
+            $table->boolean('deleted')->default('0');
             $table->unsignedInteger('branch_id')
             ->references('id')
             ->on('branches')

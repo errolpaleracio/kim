@@ -23,7 +23,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::where('branch_id', Auth::user()->branch_id)->paginate(10);
+        $branch_id = Auth::user()->branch_id;
+
+        $products = null;
+        if(isset($branch_id))
+            $products = Product::where('branch_id', $branch_id)->paginate(10);
+        else
+            $products = Product::paginate(10);
         return view('product.index')->with('products', $products);
     }
 

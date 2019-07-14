@@ -21,7 +21,13 @@ class SalesController extends Controller
      */
     public function index()
     {
-        $sales = Sales::paginate(10);
+        $branch_id = Auth::user()->branch_id;
+        $sales = null;
+        if(isset($branch_id))
+            $sales = Sales::where('branch_id')->paginate(10);
+        else
+            $sales = Sales::paginate(10);
+            
         return view('sales.index')->with('sales', $sales);
     }
 
