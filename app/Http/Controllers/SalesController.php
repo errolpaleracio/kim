@@ -38,7 +38,15 @@ class SalesController extends Controller
      */
     public function create()
     {
-        $products = Product::where('branch_id', Auth::user()->branch_id)->get();
+        $branch_id = Auth::user()->branch_id;
+        if(isset($branch_id)){
+            $products = Product::where([
+                'branch_id' => $branch_id,
+                'deleted' => '0'
+            ])->get();
+        }else{
+            $products = Product::where('deleted', '0')->get();
+        }
         return view('sales.sales_form')->with('products', $products);
     }
 

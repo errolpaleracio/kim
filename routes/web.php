@@ -21,5 +21,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/products', 'ProductController');
 
+Route::get('/delete-product', 'ProductController@delete')->name('delete-product');
+
+Route::post('/update-product/{id}', 'ProductController@update')->name('update-product');
+
+Route::get('/show-restock/{id}', 'ProductController@show_restock')->name('show-restock');
+
+Route::post('/restock-product', 'ProductController@restock')->name('restock-product');
+
 Route::resource('/sales', 'SalesController');
 
