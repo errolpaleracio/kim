@@ -28,7 +28,7 @@ class LookupController extends Controller
     {
         $sale = new Sales();
         $sale->sales_date = Carbon::now();
-        $sale->discount = $request->input('discount');
+        
         $sale->branch_id = $request->input('branch_id');
         $sale->save();
 
@@ -41,6 +41,7 @@ class LookupController extends Controller
         $sale_item->unit_price = $request->input('unit_price');
         $sale_item->quantity = $request->input('quantity');
         $sale_item->product_id = $request->input('product_id');
+        $sale_item->discount = $request->input('discount');
         $sale_item->sales_id = $request->input('sales_id');
         $sale_item->save();
 

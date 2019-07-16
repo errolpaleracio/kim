@@ -17,6 +17,7 @@ class CreateSaleItemsTable extends Migration
             $table->increments('id');
             $table->integer('quantity');
             $table->decimal('unit_price', 13, 2);
+            $table->decimal('discount', 13, 2);
             $table->unsignedInteger('product_id')
             ->references('id')
             ->on('products')

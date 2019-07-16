@@ -23,6 +23,11 @@ class Sales extends Model
 
     public function get_total()
     {
-        return $this->sales_items()->sum(DB::raw('unit_price * quantity'));
+        return $this->sales_items()->sum(DB::raw('unit_price * quantity - discount'));
+    }
+
+    public function get_discount()
+    {
+        return $this->sales_items()->sum(DB::raw('discount'));
     }
 }

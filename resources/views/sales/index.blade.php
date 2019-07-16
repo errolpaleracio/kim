@@ -20,8 +20,8 @@
                     <td>{{$sale->id}}</td>
                     <td>{{date_format(date_create($sale->sales_date), 'F d, Y')}}</td>                    
                     <td>{{$sale->get_total()}}</td>
-                    <td>{{$sale->discount}}</td>
-                    <td>{{$sale->get_total() - $sale->discount}}</td>
+                    <td>{{$sale->get_discount()}}</td>
+                    <td>{{$sale->get_total()}}</td>
                     <td>{{$sale->branch->name}}</td>
                     <td><button class="btn btn-primary" data-toggle="modal" data-target="#ViewSalesDetailModal" data-id="{{$sale->id}}">View Details</button></td>
                 </tr>
@@ -48,10 +48,11 @@
                 <table class="table" id="sales_items">
                     <thead>
                         <tr>
+                            <th>Product</th>
                             <th>Quantity</th>
                             <th>Unit Price</th>
-                            <th>Product</th>
                             <th>Total</th>
+                            <th>Discount</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -78,10 +79,11 @@ window.onload = function(){
             success: function(result,status,xhr){
                 $.each(result, function(i, item){
                    var $tr = $('<tr>').append(
+                        $('<td>').text(item.product.name),
                         $('<td>').text(item.quantity),
                         $('<td>').text(item.unit_price),
-                        $('<td>').text(item.product.name),
-                        $('<td>').text(parseFloat(item.quantity * item.unit_price).toFixed(2))
+                        $('<td>').text(parseFloat(item.quantity * item.unit_price - item.discount).toFixed(2)),
+                        $('<td>').text(item.discount)
                    ).appendTo($tbody);
                 });
             }

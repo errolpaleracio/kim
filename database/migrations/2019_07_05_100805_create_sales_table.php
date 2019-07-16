@@ -16,7 +16,6 @@ class CreateSalesTable extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->increments('id');
             $table->date('sales_date');
-            $table->decimal('discount', 13, 2);
             $table->unsignedInteger('branch_id')
             ->references('id')
             ->on('branches')
