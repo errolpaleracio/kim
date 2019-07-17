@@ -23,7 +23,6 @@
                     <td>{{$product->critical_lvl}}</td>
                     <td>
                         <a href="{{route('products.show', ['product' => $product->id])}}" class="btn btn-primary">Update</a>
-                        <a href="{{route('delete-product', ['id' => $product->id])}}" class="btn btn-danger delete-product">Delete</a>
                         <a href="{{route('show-restock', ['id' => $product->id])}}" class="btn btn-success">Restock</a>
                     </td>
                 </tr>
