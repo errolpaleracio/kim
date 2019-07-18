@@ -31,3 +31,13 @@ Route::post('/restock-product', 'ProductController@restock')->name('restock-prod
 
 Route::resource('/sales', 'SalesController');
 
+Route::get('/accounts', 'AccountController@ShowAllAccounts')->name('accounts');
+
+Route::get('/account/username', 'AccountController@ShowChangeUsernameView')->name('change-username-view');
+Route::post('/account/username', 'AccountController@ChangeUsername')->name('change-username');
+
+Route::get('/account/password', 'AccountController@ShowChangePasswordView')->name('change-password-view');
+Route::post('/account/password', 'AccountController@ChangePassword')->name('change-password');
+
+Route::get('/account/create', 'AccountController@ShowCreateAccountForm')->name('show-create-account');
+Route::post('/account/create', 'AccountController@CreateAccount')->name('create-account');

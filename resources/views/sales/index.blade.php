@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
+    @if(Auth::user()->branch_id != null)
     <a href="sales/create" class="btn btn-primary mb-4">Add new Sales</a>
+    @endif
     <table class="table table-bordered table-striped">
         <thead>
             <tr>

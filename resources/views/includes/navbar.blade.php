@@ -30,11 +30,19 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a href="{{route('change-username-view')}}" class="dropdown-item">Change Username</a>
+                            <a href="{{route('change-password-view')}}" class="dropdown-item">Change Password</a>
+                            @if(Auth::user()->branch_id == null)
+                                <div class="dropdown-divider"></div>
+                                <a href="{{route('accounts')}}" class="dropdown-item">Accounts</a>
+                            @endif
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
+                            
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email', 'password',
+        'name', 'username', 'email', 'password', 'branch_id'
     ];
 
     /**
@@ -38,5 +39,9 @@ class User extends Authenticatable
 
     public function getBranchIdAttribute($value){
         return $value;
+    }
+
+    public function isAdmin(){
+        return $this->branch_id == 3;
     }
 }
