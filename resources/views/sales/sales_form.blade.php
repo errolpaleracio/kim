@@ -107,7 +107,6 @@
             $('#sales_form').submit(function(e){
                 e.preventDefault();
             })
-            
 
             $('#add_product').on('click', function(){
                 var product_id = $selected_product.find('option:selected').val();
@@ -245,7 +244,6 @@
             document.getElementById('discount').onkeypress = proccessDiscount;
             
         }
-
-
+        
     </script>
 @endsection

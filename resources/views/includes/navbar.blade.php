@@ -30,7 +30,6 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a href="{{route('change-username-view')}}" class="dropdown-item">Change Username</a>
                             <a href="{{route('change-password-view')}}" class="dropdown-item">Change Password</a>
                             @if(Auth::user()->branch_id == null)
                                 <div class="dropdown-divider"></div>
